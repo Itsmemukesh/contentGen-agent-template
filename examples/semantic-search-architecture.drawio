@@ -1,0 +1,119 @@
+<mxfile host="app.diagrams.net" modified="2026-06-01T12:00:00.000Z" agent="GitHub Copilot" version="24.7.17" type="device">
+  <diagram id="semantic-search-arch" name="Semantic Search High Level">
+    <mxGraphModel dx="1600" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <mxCell id="title" value="Diligent One Semantic Search - High-Level Architecture" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=24;fontStyle=1;fontColor=#1F2937;" vertex="1" parent="1">
+          <mxGeometry x="280" y="20" width="1040" height="40" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="browserZone" value="User Experience (Helpdocs UI)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#60A5FA;fontStyle=1;align=left;verticalAlign=top;spacingTop=10;spacingLeft=12;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="40" y="90" width="470" height="540" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="cloudZone" value="AWS Semantic Search Services" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0FDF4;strokeColor=#4ADE80;fontStyle=1;align=left;verticalAlign=top;spacingTop=10;spacingLeft=12;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="560" y="90" width="560" height="540" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="contentZone" value="Content Sources and Output" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFBEB;strokeColor=#F59E0B;fontStyle=1;align=left;verticalAlign=top;spacingTop=10;spacingLeft=12;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="1170" y="90" width="390" height="540" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="user" value="User" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#6B7280;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="90" y="160" width="90" height="60" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="searchPage" value="MadCap Flare Search Page&#xa;(D1P Search.htm)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#3B82F6;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="220" y="150" width="250" height="70" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="semanticJs" value="secure-semantic-search.js&#xa;+ config + CSS" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#3B82F6;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="220" y="260" width="250" height="80" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="madcap" value="Built-in MadCap Keyword Search&#xa;(continues to run in parallel)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#3B82F6;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="220" y="380" width="250" height="80" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="answerPanel" value="AI Answer Panel&#xa;+ Source Citations" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#3B82F6;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="220" y="500" width="250" height="80" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="apiGateway" value="API Gateway&#xa;/prod/search" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#22C55E;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="620" y="170" width="190" height="80" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="lambda" value="Lambda Function&#xa;Search Orchestrator" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#22C55E;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="860" y="170" width="210" height="80" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="bedrock" value="Amazon Bedrock&#xa;Knowledge Base" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#22C55E;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="710" y="320" width="250" height="90" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="s3" value="S3 Data Source&#xa;Helpdocs content embeddings" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#22C55E;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="710" y="460" width="250" height="90" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="publishedHelpdocs" value="Published Helpdocs Pages&#xa;(feature/prod environments)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D97706;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="1240" y="230" width="250" height="90" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="leadershipNote" value="Outcome: Users receive instant AI answers with linked source pages while preserving existing MadCap search results." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#9CA3AF;fontSize=13;fontStyle=2;" vertex="1" parent="1">
+          <mxGeometry x="1240" y="400" width="250" height="130" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e1" value="Search query" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#4B5563;endArrow=block;endFill=1;fontSize=11;" edge="1" parent="1" source="user" target="searchPage">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e2" value="Triggers" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#2563EB;endArrow=block;endFill=1;fontSize=11;" edge="1" parent="1" source="searchPage" target="semanticJs">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e3" value="Keyword results" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#2563EB;endArrow=block;endFill=1;fontSize=11;" edge="1" parent="1" source="searchPage" target="madcap">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e4" value="POST query + x-api-key" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#16A34A;endArrow=block;endFill=1;fontSize=11;" edge="1" parent="1" source="semanticJs" target="apiGateway">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e5" value="Invoke" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#16A34A;endArrow=block;endFill=1;fontSize=11;" edge="1" parent="1" source="apiGateway" target="lambda">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e6" value="Retrieve context" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#16A34A;endArrow=block;endFill=1;fontSize=11;" edge="1" parent="1" source="lambda" target="bedrock">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e7" value="Vector index and source docs" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#16A34A;endArrow=block;endFill=1;fontSize=11;" edge="1" parent="1" source="bedrock" target="s3">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e8" value="Answer + citations" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#16A34A;endArrow=block;endFill=1;fontSize=11;" edge="1" parent="1" source="lambda" target="semanticJs">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="965" y="290"/>
+              <mxPoint x="470" y="290"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="e9" value="Render" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#2563EB;endArrow=block;endFill=1;fontSize=11;" edge="1" parent="1" source="semanticJs" target="answerPanel">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e10" value="Citation links" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#D97706;endArrow=block;endFill=1;fontSize=11;" edge="1" parent="1" source="answerPanel" target="publishedHelpdocs">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e11" value="Parallel experience" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;dashed=1;html=1;strokeColor=#6B7280;endArrow=block;endFill=1;fontSize=11;" edge="1" parent="1" source="madcap" target="answerPanel">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
