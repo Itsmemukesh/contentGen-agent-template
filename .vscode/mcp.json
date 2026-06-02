@@ -1,0 +1,166 @@
+{
+  "description": "MCP (Model Context Protocol) configuration template for documentation generation agent",
+  "mcpServers": {
+    "github": {
+      "type": "builtin",
+      "description": "GitHub integration - fetch issues, PRs, discussions",
+      "enabled": true,
+      "required": true,
+      "config": {
+        "owner": "your-org",
+        "repo": "your-repo",
+        "auth": "environment:GITHUB_TOKEN"
+      },
+      "environment": {
+        "GITHUB_TOKEN": "github_pat_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+      }
+    },
+    "figma": {
+      "type": "builtin",
+      "description": "Figma integration - fetch designs and component details",
+      "enabled": false,
+      "required": false,
+      "config": {
+        "team_id": "your-figma-team-id",
+        "auth": "environment:FIGMA_TOKEN"
+      },
+      "environment": {
+        "FIGMA_TOKEN": "figd_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+      }
+    },
+    "jira": {
+      "type": "builtin",
+      "description": "Jira integration - fetch tickets and specs",
+      "enabled": false,
+      "required": false,
+      "config": {
+        "host": "https://your-domain.atlassian.net",
+        "project_key": "DOCS",
+        "auth": "environment:JIRA_AUTH"
+      },
+      "environment": {
+        "JIRA_AUTH": "Basic base64_encoded_username:api_token"
+      }
+    },
+    "confluence": {
+      "type": "builtin",
+      "description": "Confluence integration - fetch specs and background",
+      "enabled": false,
+      "required": false,
+      "config": {
+        "host": "https://your-domain.atlassian.net/wiki",
+        "auth": "environment:CONFLUENCE_AUTH"
+      },
+      "environment": {
+        "CONFLUENCE_AUTH": "Basic base64_encoded_username:api_token"
+      }
+    },
+    "drawio": {
+      "type": "builtin",
+      "description": "Draw.io integration - generate diagrams",
+      "enabled": false,
+      "required": false,
+      "config": {
+        "api_endpoint": "https://drawio-mcp.example.com"
+      }
+    },
+    "custom-internal-api": {
+      "type": "sse",
+      "description": "Custom internal API - extend with your own MCP",
+      "enabled": false,
+      "required": false,
+      "config": {
+        "endpoint": "http://localhost:3000/mcp",
+        "auth": "environment:CUSTOM_MCP_AUTH"
+      },
+      "environment": {
+        "CUSTOM_MCP_AUTH": "Bearer your_custom_token_here"
+      }
+    }
+  },
+  "setup_instructions": {
+    "github": {
+      "step1": "Create a personal access token at https://github.com/settings/tokens",
+      "step2": "Select scopes: repo, workflow, read:discussion",
+      "step3": "Copy token and set GITHUB_TOKEN environment variable",
+      "step4": "Update 'owner' and 'repo' in config above",
+      "link": "https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens"
+    },
+    "figma": {
+      "step1": "Get Figma token at https://www.figma.com/developers/api#access-tokens",
+      "step2": "Create personal access token",
+      "step3": "Copy token and set FIGMA_TOKEN environment variable",
+      "step4": "Find your team ID in Figma URL (figma.com/team/{TEAM_ID})",
+      "link": "https://www.figma.com/developers"
+    },
+    "jira": {
+      "step1": "Generate Jira API token at https://id.atlassian.com/manage-profile/security/api-tokens",
+      "step2": "Create auth string: base64(username:api_token)",
+      "step3": "Set JIRA_AUTH environment variable with 'Basic {auth_string}'",
+      "step4": "Update host and project_key in config",
+      "link": "https://support.atlassian.com/atlassian-account/docs/manage-api-tokens-for-your-atlassian-account/"
+    },
+    "confluence": {
+      "step1": "Same as Jira - use same API token",
+      "step2": "Create auth string: base64(username:api_token)",
+      "step3": "Set CONFLUENCE_AUTH environment variable",
+      "step4": "Update host to your Confluence URL",
+      "link": "https://support.atlassian.com/atlassian-account/docs/manage-api-tokens-for-your-atlassian-account/"
+    },
+    "drawio": {
+      "step1": "This is a built-in optional MCP",
+      "step2": "Works with draw.io online editor",
+      "step3": "No auth required for basic usage",
+      "link": "https://github.com/jgraph/drawio-mcp"
+    },
+    "custom-sse-mcp": {
+      "step1": "Custom MCPs use Server-Sent Events (SSE) pattern",
+      "step2": "Implement an HTTP server at your endpoint",
+      "step3": "Implement SSE endpoints for agent communication",
+      "step4": "See examples/ folder for starter templates",
+      "link": "https://spec.modelcontextprotocol.io"
+    }
+  },
+  "environment_setup": {
+    "windows_cmd": "set GITHUB_TOKEN=your_token_here && set FIGMA_TOKEN=your_token",
+    "windows_powershell": "$env:GITHUB_TOKEN='your_token_here'; $env:FIGMA_TOKEN='your_token'",
+    "macos_linux": "export GITHUB_TOKEN=your_token_here && export FIGMA_TOKEN=your_token",
+    "dotenv_file": {
+      "description": "Create .env file in workspace root (add to .gitignore)",
+      "content": "GITHUB_TOKEN=your_token_here\nFIGMA_TOKEN=your_token\nJIRA_AUTH=Basic ...\nCONFLUENCE_AUTH=Basic ...\nCUSTOM_MCP_AUTH=Bearer ..."
+    }
+  },
+  "testing": {
+    "test_github": "Run: copilot-agent test --mcp github --cmd 'fetch issue #1'",
+    "test_figma": "Run: copilot-agent test --mcp figma --cmd 'fetch design figma-url'",
+    "test_jira": "Run: copilot-agent test --mcp jira --cmd 'search JQL'",
+    "verify_all": "All MCPs should respond within 2 seconds"
+  },
+  "examples": {
+    "example1_github_issue": {
+      "description": "Fetch issue and generate documentation from it",
+      "query": "Create guide from GitHub issue #456",
+      "mcp_used": "github",
+      "flow": "agent → fetch issue #456 → analyze context → generate guide"
+    },
+    "example2_figma_design": {
+      "description": "Use Figma design to document UI feature",
+      "query": "Document the auth flow shown in Figma design",
+      "mcp_used": "figma",
+      "flow": "agent → fetch design → extract UI labels → generate steps"
+    },
+    "example3_combined": {
+      "description": "Use multiple sources together",
+      "query": "Document new dashboard feature from GitHub issue #123 and Figma design",
+      "mcp_used": "github + figma",
+      "flow": "agent → fetch issue + design → combine context → generate guide with screenshots"
+    }
+  },
+  "customization_tips": {
+    "tip1": "Start with GitHub enabled (required for most workflows)",
+    "tip2": "Add Figma if your team uses design-first documentation",
+    "tip3": "Enable Jira/Confluence if integrated with issue tracking",
+    "tip4": "Custom MCPs allow integration with internal tools (wikis, DBs, etc.)",
+    "tip5": "Use .env file for sensitive tokens (never commit to git)"
+  }
+}
