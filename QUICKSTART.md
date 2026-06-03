@@ -13,13 +13,13 @@ Get the contentGen agent running in your documentation repository in under 5 min
 Copy the template files to your repo:
 
 ```bash
-# Clone or download template_files/
+# Clone or download contentGen-agent-template/
 cd your-repo
 
 # Copy template structure
-cp -r template_files/.github ./.github
-cp -r template_files/.vscode ./.vscode
-cp template_files/README.md ./AI_DOCS_README.md  # Optional: reference copy
+cp -r contentGen-agent-template/.github ./.github
+cp -r contentGen-agent-template/.vscode ./.vscode
+cp contentGen-agent-template/README.md ./AI_DOCS_README.md  # Optional: reference copy
 ```
 
 Your repo now has:
